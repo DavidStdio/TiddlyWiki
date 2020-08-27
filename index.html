@@ -141,6 +141,8 @@ Error message and password prompt
 
 <p>This <a class="tc-tiddlylink-external" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">TiddlyWiki</a> contains the following tiddlers:</p><p><ul>
 
+<li>$:/config/DownloadSaver/AutoSave</li>
+
 <li>$:/core</li>
 
 <li>$:/GitHub/Filename</li>
@@ -152,6 +154,8 @@ Error message and password prompt
 <li>$:/GitHub/ServerURL</li>
 
 <li>$:/GitHub/Username</li>
+
+<li>$:/GitLab/Username</li>
 
 <li>$:/isEncrypted</li>
 
@@ -175,6 +179,8 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>ARM aapcs decipher</li>
+
 <li>BLE Throughput</li>
 
 <li>Bluetooth wiki</li>
@@ -193,6 +199,9 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
+<div created="20200826134240033" modified="20200826134316999" title="$:/config/DownloadSaver/AutoSave">
+<pre>no</pre>
+</div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" name="Core" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.23-prerelease">
 <pre>{
     &quot;tiddlers&quot;: {
@@ -9680,19 +9689,22 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20200812124034496" modified="20200812134534324" title="$:/GitHub/Filename">
+<div created="20200812124034496" modified="20200826134345734" title="$:/GitHub/Filename">
 <pre>index.html</pre>
 </div>
-<div created="20200812124030481" modified="20200812124030481" title="$:/GitHub/Path">
+<div created="20200812124030481" modified="20200826134329208" title="$:/GitHub/Path">
 <pre>/</pre>
 </div>
 <div created="20200812124013753" modified="20200812124019875" title="$:/GitHub/Repo">
 <pre>DavidStdio/TiddlyWiki</pre>
 </div>
-<div created="20200812124212840" modified="20200812124212840" title="$:/GitHub/ServerURL">
-<pre>https://davidstdio.github.io/TiddlyWiki/</pre>
+<div created="20200812124212840" modified="20200827073207413" title="$:/GitHub/ServerURL">
+<pre>https://api.github.com</pre>
 </div>
 <div created="20200812123523921" modified="20200812123552036" title="$:/GitHub/Username">
+<pre>davidstdio</pre>
+</div>
+<div created="20200827071742733" modified="20200827071746297" title="$:/GitLab/Username">
 <pre>davidstdio</pre>
 </div>
 <div title="$:/isEncrypted">
@@ -9704,7 +9716,7 @@ Error message and password prompt
 <div created="20200812123434981" modified="20200812123434981" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Saving</pre>
 </div>
-<div created="20200812123450621" modified="20200812123450621" title="$:/state/tab-2065006209">
+<div created="20200812123450621" modified="20200827073134636" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
 <div created="20200824141719166" modified="20200824143042600" title="$:/state/tab/moresidebar-1850697562">
@@ -9716,7 +9728,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200824142937985" list="$:/ControlPanel [[BLE Throughput]] [[Bluetooth wiki]]" modified="20200824143553296" title="$:/StoryList">
+<div created="20200826133804311" list="$:/ControlPanel [[ARM aapcs decipher]] [[BLE Throughput]] GettingStarted" modified="20200826134153092" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9732,23 +9744,23 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20200824142929968&quot;
+            &quot;text&quot;: &quot;20200826133756848&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
-            &quot;text&quot;: &quot;https://davidstdio.github.io/TiddlyWiki/&quot;
+            &quot;text&quot;: &quot;file:///C:/Users/E014283/workarea/Docs/TiddlyWiki/index.html&quot;
         },
         &quot;$:/info/url/host&quot;: {
             &quot;title&quot;: &quot;$:/info/url/host&quot;,
-            &quot;text&quot;: &quot;davidstdio.github.io&quot;
+            &quot;text&quot;: &quot;&quot;
         },
         &quot;$:/info/url/hostname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/hostname&quot;,
-            &quot;text&quot;: &quot;davidstdio.github.io&quot;
+            &quot;text&quot;: &quot;&quot;
         },
         &quot;$:/info/url/protocol&quot;: {
             &quot;title&quot;: &quot;$:/info/url/protocol&quot;,
-            &quot;text&quot;: &quot;https:&quot;
+            &quot;text&quot;: &quot;file:&quot;
         },
         &quot;$:/info/url/port&quot;: {
             &quot;title&quot;: &quot;$:/info/url/port&quot;,
@@ -9756,7 +9768,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/pathname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/pathname&quot;,
-            &quot;text&quot;: &quot;/TiddlyWiki/&quot;
+            &quot;text&quot;: &quot;/C:/Users/E014283/workarea/Docs/TiddlyWiki/index.html&quot;
         },
         &quot;$:/info/url/search&quot;: {
             &quot;title&quot;: &quot;$:/info/url/search&quot;,
@@ -9764,7 +9776,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/origin&quot;: {
             &quot;title&quot;: &quot;$:/info/url/origin&quot;,
-            &quot;text&quot;: &quot;https://davidstdio.github.io&quot;
+            &quot;text&quot;: &quot;file://&quot;
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
@@ -9890,8 +9902,15 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20200824143432737" modified="20200824143516078" tags="" title="BLE Throughput">
-<pre></pre>
+<div created="20200826133856820" modified="20200826134113077" tags="" title="ARM aapcs decipher">
+<pre>Following command 
+
+''arm-none-eabi-objdump.exe  -d stm32l452_rmk4.elf | less''
+
+will give full disassembly of the binary</pre>
+</div>
+<div created="20200824143432737" modified="20200826133820815" tags="" title="BLE Throughput">
+<pre>aaa</pre>
 </div>
 <div created="20200824141517949" modified="20200824143418816" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
