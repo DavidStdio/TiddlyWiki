@@ -183,6 +183,8 @@ Error message and password prompt
 
 <li>Bluetooth wiki</li>
 
+<li>Draft of 'Stackoverflow Debug on STM32L4 mcu'</li>
+
 <li>Stackoverflow Debug on STM32L4 mcu</li>
 
 </ul>
@@ -9728,7 +9730,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200827075014697" list="[[Stackoverflow Debug on STM32L4 mcu]] GettingStarted" modified="20200827075014697" title="$:/StoryList">
+<div created="20200827075014697" list="[[Draft of 'Stackoverflow Debug on STM32L4 mcu']] GettingStarted" modified="20200827075014697" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9909,6 +9911,59 @@ Error message and password prompt
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
 
 BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. </pre>
+</div>
+<div created="20200826124733722" draft.of="Stackoverflow Debug on STM32L4 mcu" draft.title="Stackoverflow Debug on STM32L4 mcu" modified="20200827075739284" tags="" title="Draft of 'Stackoverflow Debug on STM32L4 mcu'">
+<pre>Following command 
+
+''arm-none-eabi-objdump.exe  -d stm32l452_rmk4.elf
+''
+
+gives full disassembly of the binary :
+
+
+
+```
+.
+.
+.
+
+08004a40 &lt;Reset_Handler&gt;:
+ 8004a40:       f8df d034       ldr.w   sp, [pc, #52]   ; 8004a78 &lt;LoopForever+0x2&gt;
+ 8004a44:       2100            movs    r1, #0
+ 8004a46:       e003            b.n     8004a50 &lt;LoopCopyDataInit&gt;
+
+08004a48 &lt;CopyDataInit&gt;:
+ 8004a48:       4b0c            ldr     r3, [pc, #48]   ; (8004a7c &lt;LoopForever+0x6&gt;)
+ 8004a4a:       585b            ldr     r3, [r3, r1]
+ 8004a4c:       5043            str     r3, [r0, r1]
+ 8004a4e:       3104            adds    r1, #4
+
+08004a50 &lt;LoopCopyDataInit&gt;:
+ 8004a50:       480b            ldr     r0, [pc, #44]   ; (8004a80 &lt;LoopForever+0xa&gt;)
+ 8004a52:       4b0c            ldr     r3, [pc, #48]   ; (8004a84 &lt;LoopForever+0xe&gt;)
+ 8004a54:       1842            adds    r2, r0, r1
+ 8004a56:       429a            cmp     r2, r3
+ 8004a58:       d3f6            bcc.n   8004a48 &lt;CopyDataInit&gt;
+ 8004a5a:       4a0b            ldr     r2, [pc, #44]   ; (8004a88 &lt;LoopForever+0x12&gt;)
+ 8004a5c:       e002            b.n     8004a64 &lt;LoopFillZerobss&gt;
+
+08004a5e &lt;FillZerobss&gt;:
+ 8004a5e:       2300            movs    r3, #0
+ 8004a60:       f842 3b04       str.w   r3, [r2], #4
+
+08004a64 &lt;LoopFillZerobss&gt;:
+ 8004a64:       4b09            ldr     r3, [pc, #36]   ; (8004a8c &lt;LoopForever+0x16&gt;)
+ 8004a66:       429a            cmp     r2, r3
+ 8004a68:       d3f9            bcc.n   8004a5e &lt;FillZerobss&gt;
+ 8004a6a:       f7ff ffb3       bl      80049d4 &lt;SystemInit&gt;
+ 8004a6e:       f003 fbed       bl      800824c &lt;__libc_init_array&gt;
+ 8004a72:       f7ff fd39       bl      80044e8 &lt;main&gt;
+.
+.
+.
+```
+
+</pre>
 </div>
 <div created="20200826124733722" modified="20200827075221266" tags="" title="Stackoverflow Debug on STM32L4 mcu">
 <pre>Following command 
