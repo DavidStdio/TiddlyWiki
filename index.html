@@ -201,8 +201,6 @@ Error message and password prompt
 
 <li>Bluetooth wiki</li>
 
-<li>Draft of 'Add SEGGER SystemView in an arm target in IAR 7.40'</li>
-
 <li>Reactance, capacity</li>
 
 <li>t2_encoding.PNG</li>
@@ -9769,7 +9767,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200910104159491" list="[[Draft of 'Add SEGGER SystemView in an arm target in IAR 7.40']] [[Reactance, capacity]]" modified="20200910105815826" title="$:/StoryList">
+<div created="20200910104159491" list="[[Add SEGGER SystemView in an arm target in IAR 7.40]] [[Reactance, capacity]]" modified="20200910105815826" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9952,7 +9950,7 @@ Error message and password prompt
 <div created="20200827081427276" modified="20200827081427276" title="$:/themes/tiddlywiki/vanilla/options/sidebarlayout">
 <pre>fluid-fixed</pre>
 </div>
-<div created="20200910104228987" modified="20200910105755845" tags="" title="Add SEGGER SystemView in an arm target in IAR 7.40">
+<div created="20200910104228987" modified="20200910111336242" tags="" title="Add SEGGER SystemView in an arm target in IAR 7.40">
 <pre>STM32L486 chip, bsp generated with CubeMX with FreeRTOS 
 IAR workbench 7.40
 
@@ -9960,7 +9958,32 @@ FreeRTOS has hooks for diagnostics support. Macros like : traceTASK_NOTIFY_TAKE,
 and redefined by Segger SystemView with actual implementation in SEGGER_SYSVIEW_FreeRTOS.h, so in SystemView deployment instructions it is 
 stated : &quot;At the end of FreeRTOSConfig.h or before every FreeRTOS.h add #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot;&quot; 
 
- </pre>
+Following this instruction in IAR 7.40 results for me with following issue: 
+
+portasm.s 
+Error[2]: Failed to open #include file 'SEGGER_SYSVIEW_FreeRTOS.h' ....\Inc\FreeRTOSConfig.h 
+Error while running Assembler 
+
+That is because in the FreeRTOSConfig.h is included in portasm.s of freertos, so just like the compiler, it is required to set the include path for 
+assembler so it can find the file. After relevant paths were added in the preprocessor tab, of the assembler category, following issue appeared:
+
+portasm.s 
+Error[2]: Failed to open #include file 'stdarg.h' .....\Middlewares\Third_Party\SystemView_Src_V252d\SEGGER\SEGGER.h 67 
+Error while running Assembler 
+
+This one I did not manage to solve, so I came with a workaround.
+In the preprocessor tab, of the assembler category in Defined symbols, I've added symbol ASM, 
+and the FreeRTOSConfig.h  the  #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot; surrounded with 
+
+#ifndef ASM
+  #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot;
+#endif
+
+so only compiler parses the SEGGER_SYSVIEW_FreeRTOS.h, not the assembler
+
+
+
+</pre>
 </div>
 <div created="20200826124733722" modified="20200827135904143" tags="" title="ARMv7-m branching decipher on STM32L4 mcu">
 <pre>Following command 
@@ -10065,41 +10088,6 @@ https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
 
 BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. </pre>
-</div>
-<div created="20200910104228987" draft.of="Add SEGGER SystemView in an arm target in IAR 7.40" draft.title="Add SEGGER SystemView in an arm target in IAR 7.40" modified="20200910111319370" tags="" title="Draft of 'Add SEGGER SystemView in an arm target in IAR 7.40'">
-<pre>STM32L486 chip, bsp generated with CubeMX with FreeRTOS 
-IAR workbench 7.40
-
-FreeRTOS has hooks for diagnostics support. Macros like : traceTASK_NOTIFY_TAKE, traceTASK_DELAY and so on.... Those defined in FreeRTOS.h file
-and redefined by Segger SystemView with actual implementation in SEGGER_SYSVIEW_FreeRTOS.h, so in SystemView deployment instructions it is 
-stated : &quot;At the end of FreeRTOSConfig.h or before every FreeRTOS.h add #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot;&quot; 
-
-Following this instruction in IAR 7.40 results for me with following issue: 
-
-portasm.s 
-Error[2]: Failed to open #include file 'SEGGER_SYSVIEW_FreeRTOS.h' ....\Inc\FreeRTOSConfig.h 
-Error while running Assembler 
-
-That is because in the FreeRTOSConfig.h is included in portasm.s of freertos, so just like the compiler, it is required to set the include path for 
-assembler so it can find the file. After relevant paths were added in the preprocessor tab, of the assembler category, following issue appeared:
-
-portasm.s 
-Error[2]: Failed to open #include file 'stdarg.h' .....\Middlewares\Third_Party\SystemView_Src_V252d\SEGGER\SEGGER.h 67 
-Error while running Assembler 
-
-This one I did not manage to solve, so I came with a workaround.
-In the preprocessor tab, of the assembler category in Defined symbols, I've added symbol ASM, 
-and the FreeRTOSConfig.h  the  #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot; surrounded with 
-
-#ifndef ASM
-  #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot;
-#endif
-
-so only compiler parses the SEGGER_SYSVIEW_FreeRTOS.h, not the assembler
-
-
-
-</pre>
 </div>
 <div created="20200902162941894" modified="20200910103850177" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
