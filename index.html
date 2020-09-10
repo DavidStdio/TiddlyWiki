@@ -9950,7 +9950,7 @@ Error message and password prompt
 <div created="20200827081427276" modified="20200827081427276" title="$:/themes/tiddlywiki/vanilla/options/sidebarlayout">
 <pre>fluid-fixed</pre>
 </div>
-<div created="20200910104228987" modified="20200910111336242" tags="" title="Add SEGGER SystemView in an arm target in IAR 7.40">
+<div created="20200910104228987" modified="20200910111535755" tags="" title="Add SEGGER SystemView in an arm target in IAR 7.40">
 <pre>STM32L486 chip, bsp generated with CubeMX with FreeRTOS 
 IAR workbench 7.40
 
@@ -9975,9 +9975,9 @@ This one I did not manage to solve, so I came with a workaround.
 In the preprocessor tab, of the assembler category in Defined symbols, I've added symbol ASM, 
 and the FreeRTOSConfig.h  the  #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot; surrounded with 
 
-#ifndef ASM
+{{#ifndef ASM
   #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot;
-#endif
+#endif}}
 
 so only compiler parses the SEGGER_SYSVIEW_FreeRTOS.h, not the assembler
 
