@@ -9767,7 +9767,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200910104159491" list="[[Add SEGGER SystemView in an arm target in IAR 7.40]] [[Reactance, capacity]]" modified="20200910105815826" title="$:/StoryList">
+<div created="20200913084829797" list="[[Add SEGGER SystemView in an arm target in IAR 7.40]]" modified="20200913084833478" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9783,7 +9783,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20200910104156946&quot;
+            &quot;text&quot;: &quot;20200913084825676&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -9950,13 +9950,17 @@ Error message and password prompt
 <div created="20200827081427276" modified="20200827081427276" title="$:/themes/tiddlywiki/vanilla/options/sidebarlayout">
 <pre>fluid-fixed</pre>
 </div>
-<div created="20200910104228987" modified="20200910115204551" tags="" title="Add SEGGER SystemView in an arm target in IAR 7.40">
+<div created="20200910104228987" modified="20200913084956548" tags="" title="Add SEGGER SystemView in an arm target in IAR 7.40">
 <pre>STM32L486 chip, bsp generated with CubeMX with FreeRTOS 
 IAR workbench 7.40
 
 FreeRTOS has hooks for diagnostics support. Macros like : traceTASK_NOTIFY_TAKE, traceTASK_DELAY and so on.... Those defined in FreeRTOS.h file
 and redefined by Segger SystemView with actual implementation in SEGGER_SYSVIEW_FreeRTOS.h, so in SystemView deployment instructions it is 
-stated : &quot;At the end of FreeRTOSConfig.h or before every FreeRTOS.h add #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot;&quot; 
+
+&lt;&lt;&lt;
+stated : At the end of FreeRTOSConfig.h or before every FreeRTOS.h add #include &quot;SEGGER_SYSVIEW_FreeRTOS.h&quot;
+&lt;&lt;&lt;
+
 
 Following this instruction in IAR 7.40 results for me with following issue: 
 
