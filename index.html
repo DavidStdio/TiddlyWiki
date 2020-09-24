@@ -205,8 +205,6 @@ Error message and password prompt
 
 <li>Bluetooth wiki</li>
 
-<li>Draft of 'ADS1299'</li>
-
 <li>Reactance, capacity</li>
 
 <li>t2_encoding.PNG</li>
@@ -9773,7 +9771,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200924120952651" list="$:/Import [[Draft of 'ADS1299']]" modified="20200924120952651" title="$:/StoryList">
+<div created="20200924120952651" list="$:/Import ADS1299" modified="20200924120952651" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10010,8 +10008,10 @@ so only compiler parses the SEGGER_SYSVIEW_FreeRTOS.h, not the assembler
 
 </pre>
 </div>
-<div created="20200924104107854" modified="20200924104131335" tags="" title="ADS1299">
-<pre>The analog inputs to the device connect directly to an integrated low-noise, low-drift, high input impedance, programmable gain amplifier. ( high input impedance is important in order to vanish voltage divider effect. For example, say we have a 10V signal with 1kΩ impedance. We connect this to a 1MΩ input, the input voltage will be 10V⋅1MΩ1MΩ+1kΩ=9.99V. If we reduce the input impedance to 10kΩ, we get 10V⋅10kΩ10kΩ+1kΩ=9.09V Reduce it to 1k and we get 10V⋅1kΩ1kΩ+1kΩ=5V )</pre>
+<div created="20200924104107854" modified="20200924121237279" tags="" title="ADS1299">
+<pre>The analog inputs to the device connect directly to an integrated low-noise, low-drift, high input impedance, programmable gain amplifier. ( high input impedance is important in order to vanish voltage divider effect. For example, say we have a 10V signal with 1kΩ impedance. We connect this to a 1MΩ input, the input voltage will be 10V⋅1MΩ1MΩ+1kΩ=9.99V. If we reduce the input impedance to 10kΩ, we get 10V⋅10kΩ10kΩ+1kΩ=9.09V Reduce it to 1k and we get 10V⋅1kΩ1kΩ+1kΩ=5V )
+
+common-mode voltage point is the midpoint of the positive and negative analog input : [img[2045eq01.gif]]</pre>
 </div>
 <div created="20200826124733722" modified="20200827135904143" tags="" title="ARMv7-m branching decipher on STM32L4 mcu">
 <pre>Following command 
@@ -10116,11 +10116,6 @@ https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
 
 BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. </pre>
-</div>
-<div created="20200924104107854" draft.of="ADS1299" draft.title="ADS1299" modified="20200924121102298" tags="" title="Draft of 'ADS1299'">
-<pre>The analog inputs to the device connect directly to an integrated low-noise, low-drift, high input impedance, programmable gain amplifier. ( high input impedance is important in order to vanish voltage divider effect. For example, say we have a 10V signal with 1kΩ impedance. We connect this to a 1MΩ input, the input voltage will be 10V⋅1MΩ1MΩ+1kΩ=9.99V. If we reduce the input impedance to 10kΩ, we get 10V⋅10kΩ10kΩ+1kΩ=9.09V Reduce it to 1k and we get 10V⋅1kΩ1kΩ+1kΩ=5V )
-
-common-mode voltage point is the midpoint of the positive and negative analog input : </pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
