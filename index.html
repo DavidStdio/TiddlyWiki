@@ -9771,7 +9771,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200924120952651" list="$:/Import ADS1299" modified="20200924120952651" title="$:/StoryList">
+<div created="20201007065504342" list="[[Bluetooth wiki]] [[BLE Throughput]]" modified="20201007065506713" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9787,7 +9787,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20200924104301185&quot;
+            &quot;text&quot;: &quot;20201007063606622&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -10112,10 +10112,18 @@ https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-
 
 </pre>
 </div>
-<div created="20200824141517949" modified="20200824143418816" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
+<div created="20200824141517949" modified="20201007065520386" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
 
-BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. </pre>
+BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. 
+
+
+In general, one can identify three dierent typologies of HCI communication:
+• host sends to controller HCI commands;
+• controller noties to the host HCI events;
+• host and controller bidirectionally exchanges (TX and RX) HCI ACL data (Asynchronous
+ConnectionLess).
+</pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
