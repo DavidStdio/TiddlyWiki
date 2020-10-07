@@ -10112,17 +10112,19 @@ https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-
 
 </pre>
 </div>
-<div created="20200824141517949" modified="20201007065520386" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
+<div created="20200824141517949" modified="20201007065707603" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
 
 BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. 
 
 
-In general, one can identify three dierent typologies of HCI communication:
+In general, one can identify three different typologies of HCI communication:
+
 • host sends to controller HCI commands;
-• controller noties to the host HCI events;
-• host and controller bidirectionally exchanges (TX and RX) HCI ACL data (Asynchronous
-ConnectionLess).
+
+• controller notifies to the host HCI events;
+
+• host and controller bidirectionally exchanges (TX and RX) HCI ACL data (Asynchronous ConnectionLess).
 </pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
