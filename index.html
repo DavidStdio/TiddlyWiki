@@ -207,6 +207,8 @@ Error message and password prompt
 
 <li>Draft of 'New Tiddler'</li>
 
+<li>Draft of 'Vim notes'</li>
+
 <li>Reactance, capacity</li>
 
 <li>t2_encoding.PNG</li>
@@ -9775,7 +9777,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[Vim notes]]" title="$:/StoryList">
+<div list="[[Draft of 'Vim notes']]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10148,6 +10150,60 @@ and disconnect the link before anything is given to the application.</pre>
 </div>
 <div created="20201025075033196" draft.title="Vim notes" modified="20201025075033196" title="Draft of 'New Tiddler'">
 <pre></pre>
+</div>
+<div created="20201025055700664" draft.of="Vim notes" draft.title="Vim notes" modified="20201025094454957" tags="" title="Draft of 'Vim notes'">
+<pre>Search query to find all lines of the following format:
+
+any number of white spaces 0 
+
+
+`/\s*0`
+
+
+
+Search query to find lines of the following format:
+
+any number of white spaces 0 any number of white spaces 0  any number of white spaces 0  any number of white spaces 0 
+
+i.e line like this :
+
+        `0           0           0           0`
+is:
+
+`/\(\s*0\)\{4}`
+
+The {4} applies only on atom, so we need to put preceding expression in parenthesis
+ 
+To find lines that does NOT match the previous format, for example line like this:
+
+      `4053     -366844     -442311      -77478`
+
+is:
+
+`/^\(\(\s*0\)\{4}\)\@!`
+
+@! at the end is the negative look-ahead indicator
+The negative look-ahead applies only on atom, so we 
+need to put everything in parenthesis. 
+^ asserts position at start of a line
+So in words, this expression means: look for any line that from the line's 
+beginning does NOT look like `0           0           0           0`
+
+To search for all lines blocks that does NOT 
+match the following format 
+
+                           0           0           0           0
+      5522     -365290     -441287      -78074
+    -39490      -30774        7921       82126
+   1391898     1139913      792801     2672554
+                           0           0           0           0
+      4906     -366163     -441744      -77614
+    -39125      -31009        7332       81061
+   1412373     1142806      793817     2837307
+                          0           0           0           0
+Use following query
+
+`/\(\s\+0\)\{4}\n.*\n.*\n.*\n^\(\(\s*0\)\{4}\)\@!`</pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
