@@ -10162,7 +10162,7 @@ f is the ordinary frequency (measured in hertz) (sometimes symbolised with ν).
 
 As the capacitor charges or discharges, a current flows through it which is restricted by the internal impedance of the capacitor. This internal impedance is commonly known as Capacitive Reactance and is given the symbol XC in Ohms.</pre>
 </div>
-<div created="20201025075033196" modified="20201027074435663" title="SEGGER RTT usage notes">
+<div created="20201025075033196" modified="20201027074452207" title="SEGGER RTT usage notes">
 <pre>To enable RTT for binary data streaming and logging an additional channel should be enabled.
 By default SEGGER RTT enables and configures only channel 0 for text input/output.
 The default channel for binary data is channel 1, and it should be configured as follows:
@@ -10184,9 +10184,9 @@ static char _bcUpBuffer [BUFFER_SIZE];`
 
 3. And then it can be used as follows: 
 
-	SEGGER_RTT_Write(SEGGER_RTT_BINARY_CHANNEL_INDEX,
+`	SEGGER_RTT_Write(SEGGER_RTT_BINARY_CHANNEL_INDEX,
 					 data_buff,
-					 sizeof (data_buff));
+					 sizeof (data_buff));`
 </pre>
 </div>
 <div title="t2_encoding.PNG" type="image/png">
