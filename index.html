@@ -205,6 +205,8 @@ Error message and password prompt
 
 <li>Bluetooth wiki</li>
 
+<li>Draft of 'New Tiddler'</li>
+
 <li>Reactance, capacity</li>
 
 <li>SEGGER RTT usage notes</li>
@@ -9775,7 +9777,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201027072714248" list="[[SEGGER RTT usage notes]] [[Vim notes]]" modified="20201027072714248" title="$:/StoryList">
+<div created="20201203063240394" list="[[Draft of 'New Tiddler']] [[ARMv7-m branching decipher on STM32L4 mcu]]" modified="20201203063240394" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9791,7 +9793,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20201022082755365&quot;
+            &quot;text&quot;: &quot;20201130103032649&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -10145,6 +10147,12 @@ In addition to this, encrypted connections also contain a Message Integrity Chec
 This uses the IETF RFC 3610 algorithm with AES-128 (NIST FIPS-197) to create a 4 byte field for message authentication. 
 If, by chance, a corrupted message passes CRC, the MIC check will likely fail
 and disconnect the link before anything is given to the application.</pre>
+</div>
+<div created="20201208084726663" draft.of="New Tiddler" draft.title="Cortex M4 Position Independent Code -fPIC" modified="20201208084919524" tags="" title="Draft of 'New Tiddler'">
+<pre># Generate position independent code.                                   -fPIC
+# Access bss via the GOT.                                                         -mno-pic-data-is-text-relative
+# GOT is not PC-relative; store GOT location in a register.      -msingle-pic-base
+# Store GOT location in r9.                                                       -mpic-register=r9</pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
