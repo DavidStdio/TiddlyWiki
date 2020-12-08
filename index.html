@@ -207,8 +207,6 @@ Error message and password prompt
 
 <li>Cortex M4 Position Independent Code -fPIC</li>
 
-<li>Draft of 'Cortex M4 Position Independent Code -fPIC'</li>
-
 <li>Reactance, capacity</li>
 
 <li>SEGGER RTT usage notes</li>
@@ -9779,7 +9777,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201203063240394" list="[[Draft of 'Cortex M4 Position Independent Code -fPIC']] [[ARMv7-m branching decipher on STM32L4 mcu]]" modified="20201203063240394" title="$:/StoryList">
+<div created="20201203063240394" list="$:/ControlPanel [[Cortex M4 Position Independent Code -fPIC]] [[ARMv7-m branching decipher on STM32L4 mcu]]" modified="20201208085735387" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10150,13 +10148,7 @@ This uses the IETF RFC 3610 algorithm with AES-128 (NIST FIPS-197) to create a 4
 If, by chance, a corrupted message passes CRC, the MIC check will likely fail
 and disconnect the link before anything is given to the application.</pre>
 </div>
-<div created="20201208084726663" modified="20201208084938552" tags="" title="Cortex M4 Position Independent Code -fPIC">
-<pre># Generate position independent code.                                   -fPIC
-# Access bss via the GOT.                                                         -mno-pic-data-is-text-relative
-# GOT is not PC-relative; store GOT location in a register.      -msingle-pic-base
-# Store GOT location in r9.                                                       -mpic-register=r9</pre>
-</div>
-<div created="20201208084726663" draft.of="Cortex M4 Position Independent Code -fPIC" draft.title="Cortex M4 Position Independent Code -fPIC" modified="20201208085106260" tags="" title="Draft of 'Cortex M4 Position Independent Code -fPIC'">
+<div created="20201208084726663" modified="20201208085657346" tags="" title="Cortex M4 Position Independent Code -fPIC">
 <pre># Generate position independent code.                                   -fPIC
 # Access bss via the GOT.                                                         -mno-pic-data-is-text-relative
 # GOT is not PC-relative; store GOT location in a register.      -msingle-pic-base
