@@ -207,6 +207,8 @@ Error message and password prompt
 
 <li>Cortex M4 Position Independent Code -fPIC</li>
 
+<li>Draft of 'New Tiddler'</li>
+
 <li>Reactance, capacity</li>
 
 <li>SEGGER RTT usage notes</li>
@@ -9777,7 +9779,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201208113619832" list="$:/ControlPanel" modified="20201208113619832" title="$:/StoryList">
+<div list="[[Draft of 'New Tiddler']]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9793,7 +9795,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20201208113616326&quot;
+            &quot;text&quot;: &quot;20201221124115820&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -10164,6 +10166,12 @@ https://bugs.launchpad.net/gcc-arm-embedded/+bug/1523315
 https://github.com/bogdanm/udynlink
 https://www.embeddedrelated.com/showthread/comp.arch.embedded/200209-1.php
 https://github.com/rgujju/STM32-projects/tree/master/got_plt</pre>
+</div>
+<div created="20201229063430515" draft.of="New Tiddler" draft.title="BlueNrg vs STM32WB55" modified="20201229064523081" tags="" title="Draft of 'New Tiddler'">
+<pre>BlueNRG software implementation is blocking so when hci_send_req function executed it waits for a new event to arrive 
+into hciReadPktRxQueue queue.... When hci_user_evt_proc is called it also wait for a new event on the same hciReadPktRxQueue queue and there is no issue cause BlueNRG implementation is one thread so we either in hci_send_req context or in hci_user_evt_proc.... 
+
+STM32WB55 is multithreaded implementation so there are two separate event queues. HciCmdEventQueue and HciAsynchEventQueue . Into HciCmdEventQueue only written Command Complete and Command Status events and they are used to release the hci_send_req function (and associated thread) and the rest of the events are written into HciAsynchEventQueue queue, so the the thread waiting in hci_user_evt_proc will receive a new event and will process it. </pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
