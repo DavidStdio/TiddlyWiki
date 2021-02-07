@@ -10113,7 +10113,7 @@ which is the offset of ''LoopCopyDataInit''
 
 </pre>
 </div>
-<div created="20200824143432737" modified="20210207093318304" tags="" title="BLE Throughput">
+<div created="20200824143432737" modified="20210207101754644" tags="" title="BLE Throughput">
 <pre>https://interrupt.memfault.com/blog/ble-throughput-primer#le-2m-phy-bt-v50
 
 https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-high-throughput-bandwidth-solution
@@ -10122,7 +10122,10 @@ Searching for success criteria and the definition of done for my ble design
 I got to following results and conclusions: I found an science publication (Evaluating Bluetooth Low Energy 
 Suitability for Time-Critical Industrial IoT Applications) where calculated theoretical reliable throughput 
 characteristics and definitions, and then I evaluated my design against those parameters. When I will be 
-reaching theoretical boundaries the design will be considered done and successful.   </pre>
+reaching theoretical boundaries the design will be considered done and successful. Meanwhile my implementation
+is capable of transmitting 179 bytes per connection interval with retransmission and reliably meeting system deadlines.
+I.E. when I increase a packet size by 1 byte at some point I will either have to start to drop packets or the 
+systems buffers will explode since they can't be emptied in time!</pre>
 </div>
 <div created="20201229063430515" modified="20210104074725966" tags="" title="BlueNrg vs STM32WB55">
 <pre>BlueNRG software implementation is blocking so when hci_send_req function executed it waits for a new event to arrive 
