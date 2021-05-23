@@ -209,8 +209,6 @@ Error message and password prompt
 
 <li>Cortex M4 Position Independent Code -fPIC</li>
 
-<li>Draft of 'BLE Throughput'</li>
-
 <li>Reactance, capacity</li>
 
 <li>SEGGER RTT usage notes</li>
@@ -9781,7 +9779,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210523074658516" list="[[Draft of 'BLE Throughput']]" modified="20210523074658516" title="$:/StoryList">
+<div created="20210523074658516" list="[[Bluetooth wiki]] [[BLE Throughput]]" modified="20210523074715498" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10135,7 +10133,7 @@ into hciReadPktRxQueue queue.... When hci_user_evt_proc is called it also wait f
 
 STM32WB55 is multithreaded implementation so there are two separate event queues. HciCmdEventQueue and HciAsynchEventQueue . Into HciCmdEventQueue only written Command Complete and Command Status events and they are used to release the hci_send_req function (and associated thread) and the rest of the events are written into HciAsynchEventQueue queue, so the the thread waiting in hci_user_evt_proc will receive a new event and will process it. </pre>
 </div>
-<div created="20200824141517949" modified="20201007073112457" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
+<div created="20200824141517949" modified="20210523074808778" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
 
 BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. 
@@ -10163,7 +10161,13 @@ Of course checksums are not foolproof but you probably don't need to add more.
 In addition to this, encrypted connections also contain a Message Integrity Check (MIC).
 This uses the IETF RFC 3610 algorithm with AES-128 (NIST FIPS-197) to create a 4 byte field for message authentication. 
 If, by chance, a corrupted message passes CRC, the MIC check will likely fail
-and disconnect the link before anything is given to the application.</pre>
+and disconnect the link before anything is given to the application.
+
+//Question
+What is the difference between ACL and SCO Link in Bluetooth?
+
+//Answer
+SCO is for real-time narrow band signal which does not require retransmission. Voice data in Bluetooth hands free kit is an example for this. This narrow band audio is called &quot;Bluetooth voice&quot; type. Where as ACL is for all other BT data transfer including High quality audio/video data. Example is music playback through A2DP. This is high bandwidth data and hence called &quot;Advanced Audio&quot;. SCO is fixed bandwidth channels and can have maximum 3 channels per device, but throughput of ACL varies with other active connections(SCO and ACL) at that time.</pre>
 </div>
 <div created="20201208084726663" modified="20201208091556262" tags="" title="Cortex M4 Position Independent Code -fPIC">
 <pre># Generate position independent code.                                   -fPIC
@@ -10181,20 +10185,6 @@ https://bugs.launchpad.net/gcc-arm-embedded/+bug/1523315
 https://github.com/bogdanm/udynlink
 https://www.embeddedrelated.com/showthread/comp.arch.embedded/200209-1.php
 https://github.com/rgujju/STM32-projects/tree/master/got_plt</pre>
-</div>
-<div created="20200824143432737" draft.of="BLE Throughput" draft.title="BLE Throughput" modified="20210523074702054" tags="" title="Draft of 'BLE Throughput'">
-<pre>https://interrupt.memfault.com/blog/ble-throughput-primer#le-2m-phy-bt-v50
-
-https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-high-throughput-bandwidth-solution
-
-Searching for success criteria and the definition of done for my ble design
-I got to following results and conclusions: I found an science publication (Evaluating Bluetooth Low Energy 
-Suitability for Time-Critical Industrial IoT Applications) where calculated theoretical reliable throughput 
-characteristics and definitions, and then I evaluated my design against those parameters. When I will be 
-reaching theoretical boundaries the design will be considered done and successful. Meanwhile my implementation
-is capable of transmitting 179 bytes per connection interval with unbounded retransmission and 
-reliably meeting system deadlines. I.E. when I increase a packet size by 1 byte at some point I will either 
-have to start to drop packets or the systems buffers will explode since they can't be emptied in time!</pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
