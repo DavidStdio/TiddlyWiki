@@ -209,6 +209,8 @@ Error message and password prompt
 
 <li>Cortex M4 Position Independent Code -fPIC</li>
 
+<li>Draft of 'BLE Throughput'</li>
+
 <li>Reactance, capacity</li>
 
 <li>SEGGER RTT usage notes</li>
@@ -9779,7 +9781,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210207092240530" list="[[BLE Throughput]]" modified="20210207092240530" title="$:/StoryList">
+<div created="20210523074658516" list="[[Draft of 'BLE Throughput']]" modified="20210523074658516" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9795,7 +9797,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20210203072014823&quot;
+            &quot;text&quot;: &quot;20210523074652099&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -10179,6 +10181,20 @@ https://bugs.launchpad.net/gcc-arm-embedded/+bug/1523315
 https://github.com/bogdanm/udynlink
 https://www.embeddedrelated.com/showthread/comp.arch.embedded/200209-1.php
 https://github.com/rgujju/STM32-projects/tree/master/got_plt</pre>
+</div>
+<div created="20200824143432737" draft.of="BLE Throughput" draft.title="BLE Throughput" modified="20210523074702054" tags="" title="Draft of 'BLE Throughput'">
+<pre>https://interrupt.memfault.com/blog/ble-throughput-primer#le-2m-phy-bt-v50
+
+https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-high-throughput-bandwidth-solution
+
+Searching for success criteria and the definition of done for my ble design
+I got to following results and conclusions: I found an science publication (Evaluating Bluetooth Low Energy 
+Suitability for Time-Critical Industrial IoT Applications) where calculated theoretical reliable throughput 
+characteristics and definitions, and then I evaluated my design against those parameters. When I will be 
+reaching theoretical boundaries the design will be considered done and successful. Meanwhile my implementation
+is capable of transmitting 179 bytes per connection interval with unbounded retransmission and 
+reliably meeting system deadlines. I.E. when I increase a packet size by 1 byte at some point I will either 
+have to start to drop packets or the systems buffers will explode since they can't be emptied in time!</pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
