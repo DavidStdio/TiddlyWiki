@@ -9779,7 +9779,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210523074658516" list="[[Bluetooth wiki]] [[BLE Throughput]]" modified="20210523074715498" title="$:/StoryList">
+<div created="20210527112553968" list="[[Bluetooth wiki]] [[ARMv7-m branching decipher on STM32L4 mcu]]" modified="20210601114923760" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9795,7 +9795,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20210523074652099&quot;
+            &quot;text&quot;: &quot;20210527112548602&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -10133,7 +10133,7 @@ into hciReadPktRxQueue queue.... When hci_user_evt_proc is called it also wait f
 
 STM32WB55 is multithreaded implementation so there are two separate event queues. HciCmdEventQueue and HciAsynchEventQueue . Into HciCmdEventQueue only written Command Complete and Command Status events and they are used to release the hci_send_req function (and associated thread) and the rest of the events are written into HciAsynchEventQueue queue, so the the thread waiting in hci_user_evt_proc will receive a new event and will process it. </pre>
 </div>
-<div created="20200824141517949" modified="20210523074808778" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
+<div created="20200824141517949" modified="20210601115115572" tags="[[bluetooth wiki]]" title="Bluetooth wiki">
 <pre>It is important to know that maximum number of packets per connection event is dependent on the BLE stack/chipsets and is limited to 4 packets per connection event with iOS, and 6 packets per connection event in Android 
 
 BLE represents a trade-off between energy consumption, latency, piconet size, and throughput that mainly depends on parameters such as connInterval and connSlaveLatency. 
@@ -10167,7 +10167,12 @@ and disconnect the link before anything is given to the application.
 What is the difference between ACL and SCO Link in Bluetooth?
 
 //Answer
-SCO is for real-time narrow band signal which does not require retransmission. Voice data in Bluetooth hands free kit is an example for this. This narrow band audio is called &quot;Bluetooth voice&quot; type. Where as ACL is for all other BT data transfer including High quality audio/video data. Example is music playback through A2DP. This is high bandwidth data and hence called &quot;Advanced Audio&quot;. SCO is fixed bandwidth channels and can have maximum 3 channels per device, but throughput of ACL varies with other active connections(SCO and ACL) at that time.</pre>
+SCO is for real-time narrow band signal which does not require retransmission. Voice data in Bluetooth hands free kit is an example for this. This narrow band audio is called &quot;Bluetooth voice&quot; type. Where as ACL is for all other BT data transfer including High quality audio/video data. Example is music playback through A2DP. This is high bandwidth data and hence called &quot;Advanced Audio&quot;. SCO is fixed bandwidth channels and can have maximum 3 channels per device, but throughput of ACL varies with other active connections(SCO and ACL) at that time.
+
+
+//How to install BLE Sniffer on nRF52840 Dongle and run it
+
+https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
 <div created="20201208084726663" modified="20201208091556262" tags="" title="Cortex M4 Position Independent Code -fPIC">
 <pre># Generate position independent code.                                   -fPIC
