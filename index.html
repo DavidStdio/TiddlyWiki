@@ -9779,7 +9779,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210527112553968" list="[[Bluetooth wiki]] [[ARMv7-m branching decipher on STM32L4 mcu]]" modified="20210601114923760" title="$:/StoryList">
+<div created="20210728122913169" list="[[Cortex M4 Position Independent Code -fPIC]]" modified="20210728122913169" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9795,7 +9795,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20210527112548602&quot;
+            &quot;text&quot;: &quot;20210727053959849&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -9831,11 +9831,11 @@ Error message and password prompt
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
-            &quot;text&quot;: &quot;1920&quot;
+            &quot;text&quot;: &quot;1280&quot;
         },
         &quot;$:/info/browser/screen/height&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/height&quot;,
-            &quot;text&quot;: &quot;1080&quot;
+            &quot;text&quot;: &quot;720&quot;
         },
         &quot;$:/info/browser/language&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/language&quot;,
@@ -10174,7 +10174,7 @@ SCO is for real-time narrow band signal which does not require retransmission. V
 
 https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
-<div created="20201208084726663" modified="20201208091556262" tags="" title="Cortex M4 Position Independent Code -fPIC">
+<div created="20201208084726663" modified="20210728125027728" tags="" title="Cortex M4 Position Independent Code -fPIC">
 <pre># Generate position independent code.                                   -fPIC
 # Access bss via the GOT.                                                         -mno-pic-data-is-text-relative
 # GOT is not PC-relative; store GOT location in a register.      -msingle-pic-base
@@ -10189,7 +10189,46 @@ https://answers.launchpad.net/gcc-arm-embedded/+question/585437
 https://bugs.launchpad.net/gcc-arm-embedded/+bug/1523315
 https://github.com/bogdanm/udynlink
 https://www.embeddedrelated.com/showthread/comp.arch.embedded/200209-1.php
-https://github.com/rgujju/STM32-projects/tree/master/got_plt</pre>
+https://github.com/rgujju/STM32-projects/tree/master/got_plt
+
+
+
+Cortex M4 position independent with clang compiler:
+
+-fropi 
+-frwpi    
+
+compiler switches enable generation of position independent code. 
+As for now I'm stuck in following sitauation. 
+The code is generated position independent and I see that access to global variables done via r9 register, which is the desired behavior. 
+When using -frwpi, as I understand, access to both global initialized data (.data) and global uninitialized data (.bss) will be by the r9 register
+as I see in following asm generated for HAL_IncTick function:
+
+__weak void HAL_IncTick(void)
+{
+  uwTick += (uint32_t)uwTickFreq;
+
+0800ab2e &lt;HAL_IncTick&gt;:
+ 800ab2e: 40 f2 20 00  	movw	r0, #32
+ 800ab32: c0 f2 00 00  	movt	r0, #0
+ 800ab36: 49 46        	mov	r1, r9
+ 800ab38: 08 58        	ldr	r0, [r1, r0]
+ 800ab3a: 45 f6 c8 62  	movw	r2, #24264
+ 800ab3e: c0 f2 00 02  	movt	r2, #0
+ 800ab42: 8b 58        	ldr	r3, [r1, r2]
+ 800ab44: 18 44        	add	r0, r3
+ 800ab46: 88 50        	str	r0, [r1, r2]
+
+Where uwTick is in bss as it declared like that:
+
+__IO uint32_t uwTick;
+
+and it does not have initial value. 
+And where uwTickFreq is in .data as it declared like that
+
+HAL_TickFreqTypeDef uwTickFreq = HAL_TICK_FREQ_DEFAULT;  /* 1KHz */
+
+and initialized with HAL_TICK_FREQ_DEFAULT</pre>
 </div>
 <div created="20200902162941894" modified="20200910115435166" tags="" title="Reactance, capacity">
 <pre>Angular frequency ω (in radians per second), is larger than frequency ν (in cycles per second, also called Hz), by a factor of 2π
