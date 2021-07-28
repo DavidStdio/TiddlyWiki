@@ -10174,7 +10174,7 @@ SCO is for real-time narrow band signal which does not require retransmission. V
 
 https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
-<div created="20201208084726663" modified="20210728130703150" tags="" title="Cortex M4 Position Independent Code -fPIC">
+<div created="20201208084726663" modified="20210728130811555" tags="" title="Cortex M4 Position Independent Code -fPIC">
 <pre># Generate position independent code.                                   -fPIC
 # Access bss via the GOT.                                                         -mno-pic-data-is-text-relative
 # GOT is not PC-relative; store GOT location in a register.      -msingle-pic-base
@@ -10271,11 +10271,15 @@ so  0d24264 + 0x20000458 gives address of uwTick which is : 0x20006320
 And offsets to variables in .data segment is given relatively to .data section start
 which is  0x20000000  and in this part we see that 32 is used as offset to uwTickFreq
 
+
+```
  800ab2e: 40 f2 20 00  	movw	r0, #32
  800ab32: c0 f2 00 00  	movt	r0, #0
  800ab36: 49 46        	mov	r1, r9
  800ab38: 08 58        	ldr	r0, [r1, r0]
+```
 
+.data section disassembly
 
 ```
 Disassembly of section .data:
