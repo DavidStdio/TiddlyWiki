@@ -9779,7 +9779,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210728122913169" list="[[Cortex M4 Position Independent Code -fPIC]]" modified="20210728122913169" title="$:/StoryList">
+<div created="20210728122913169" list="[[ARMv7-m branching decipher on STM32L4 mcu]] [[Bluetooth wiki]] [[Cortex M4 Position Independent Code -fPIC]]" modified="20210728125036741" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10174,7 +10174,7 @@ SCO is for real-time narrow band signal which does not require retransmission. V
 
 https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
-<div created="20201208084726663" modified="20210728125027728" tags="" title="Cortex M4 Position Independent Code -fPIC">
+<div created="20201208084726663" modified="20210728125240830" tags="" title="Cortex M4 Position Independent Code -fPIC">
 <pre># Generate position independent code.                                   -fPIC
 # Access bss via the GOT.                                                         -mno-pic-data-is-text-relative
 # GOT is not PC-relative; store GOT location in a register.      -msingle-pic-base
@@ -10195,8 +10195,12 @@ https://github.com/rgujju/STM32-projects/tree/master/got_plt
 
 Cortex M4 position independent with clang compiler:
 
+
+```
 -fropi 
 -frwpi    
+
+```
 
 compiler switches enable generation of position independent code. 
 As for now I'm stuck in following sitauation. 
@@ -10204,6 +10208,8 @@ The code is generated position independent and I see that access to global varia
 When using -frwpi, as I understand, access to both global initialized data (.data) and global uninitialized data (.bss) will be by the r9 register
 as I see in following asm generated for HAL_IncTick function:
 
+
+```
 __weak void HAL_IncTick(void)
 {
   uwTick += (uint32_t)uwTickFreq;
@@ -10218,15 +10224,25 @@ __weak void HAL_IncTick(void)
  800ab42: 8b 58        	ldr	r3, [r1, r2]
  800ab44: 18 44        	add	r0, r3
  800ab46: 88 50        	str	r0, [r1, r2]
+```
+
 
 Where uwTick is in bss as it declared like that:
 
+
+```
 __IO uint32_t uwTick;
+```
+
 
 and it does not have initial value. 
 And where uwTickFreq is in .data as it declared like that
 
+
+```
 HAL_TickFreqTypeDef uwTickFreq = HAL_TICK_FREQ_DEFAULT;  /* 1KHz */
+```
+
 
 and initialized with HAL_TICK_FREQ_DEFAULT</pre>
 </div>
