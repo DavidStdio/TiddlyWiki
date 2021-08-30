@@ -9779,7 +9779,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210728122913169" list="[[ARMv7-m branching decipher on STM32L4 mcu]] [[Bluetooth wiki]] [[Cortex M4 Position Independent Code -fPIC]]" modified="20210728125036741" title="$:/StoryList">
+<div created="20210830072052434" list="[[BLE Throughput]]" modified="20210830072052434" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9795,7 +9795,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20210727053959849&quot;
+            &quot;text&quot;: &quot;20210829071326482&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -9831,11 +9831,11 @@ Error message and password prompt
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
-            &quot;text&quot;: &quot;1280&quot;
+            &quot;text&quot;: &quot;1920&quot;
         },
         &quot;$:/info/browser/screen/height&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/height&quot;,
-            &quot;text&quot;: &quot;720&quot;
+            &quot;text&quot;: &quot;1080&quot;
         },
         &quot;$:/info/browser/language&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/language&quot;,
@@ -10113,7 +10113,7 @@ which is the offset of ''LoopCopyDataInit''
 
 </pre>
 </div>
-<div created="20200824143432737" modified="20210207101901370" tags="" title="BLE Throughput">
+<div created="20200824143432737" modified="20210830072123949" tags="" title="BLE Throughput">
 <pre>https://interrupt.memfault.com/blog/ble-throughput-primer#le-2m-phy-bt-v50
 
 https://devzone.nordicsemi.com/f/nordic-q-a/254/streaming-data-over-ble-nrf8001-high-throughput-bandwidth-solution
@@ -10125,7 +10125,18 @@ characteristics and definitions, and then I evaluated my design against those pa
 reaching theoretical boundaries the design will be considered done and successful. Meanwhile my implementation
 is capable of transmitting 179 bytes per connection interval with unbounded retransmission and 
 reliably meeting system deadlines. I.E. when I increase a packet size by 1 byte at some point I will either 
-have to start to drop packets or the systems buffers will explode since they can't be emptied in time!</pre>
+have to start to drop packets or the systems buffers will explode since they can't be emptied in time!
+
+
+
+L2CAP in version 5.1 of the Bluetooth Core Specification defines several modes of operation, most
+largely concerned with flow control. ATT over Bluetooth LE connections uses the L2CAP Basic mode,
+which provides no flow control. This renders ATT at version 5.1 unreliable and applications must
+accommodate the possibility that transmitted ATT PDUs may be lost by the receiving device. In the
+case of unacknowledged PDUs, such as notifications, ''the transmitting device will know whether or
+not the PDU was received by the stack on the remote device, thanks to link layer acknowledgements,
+but has no way of knowing whether the PDU was successfully delivered to the receiving application
+at the top of the stack.''</pre>
 </div>
 <div created="20201229063430515" modified="20210104074725966" tags="" title="BlueNrg vs STM32WB55">
 <pre>BlueNRG software implementation is blocking so when hci_send_req function executed it waits for a new event to arrive 
