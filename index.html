@@ -10197,7 +10197,7 @@ SCO is for real-time narrow band signal which does not require retransmission. V
 
 https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
-<div created="20211216115502076" modified="20211216124429809" tags="" title="connecting bluetooth classic device from linux terminal">
+<div created="20211216115502076" modified="20211216124611917" tags="" title="connecting bluetooth classic device from linux terminal">
 <pre>use ``bluetoothctl`` command to pair with relevant device
 
 
@@ -10241,6 +10241,19 @@ Now give permissions to the ``/dev/rfcomm0`` port:
 ```
 sudo chmod 666 /dev/rfcomm0
 ```
+
+Now execute following command. The onlys thing I understand here is the speed which is 460800 in my case
+
+```
+sudo stty -F /dev/rfcomm0 speed 460800 cs8 -cstopb -parenb -echo
+```
+
+And now you can write into your device:
+
+```
+sudo echo -en '\xda\xde\x00\x02\x00\x00\x00' &gt; /dev/rfcomm0 
+```
+
 
 </pre>
 </div>
