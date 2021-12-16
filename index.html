@@ -211,8 +211,6 @@ Error message and password prompt
 
 <li>Cortex M4 Position Independent Code -fPIC</li>
 
-<li>Draft of 'connecting bluetooth classic device from linux terminal'</li>
-
 <li>GIT</li>
 
 <li>Reactance, capacity</li>
@@ -9787,7 +9785,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[Draft of 'connecting bluetooth classic device from linux terminal']]" title="$:/StoryList">
+<div list="[[connecting bluetooth classic device from linux terminal]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10199,8 +10197,8 @@ SCO is for real-time narrow band signal which does not require retransmission. V
 
 https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
-<div created="20211216115502076" modified="20211216120316922" tags="" title="connecting bluetooth classic device from linux terminal">
-<pre>use bluetoothctl command to pair with relevant device
+<div created="20211216115502076" modified="20211216124054923" tags="" title="connecting bluetooth classic device from linux terminal">
+<pre>use ``bluetoothctl`` command to pair with relevant device
 
 
 ```
@@ -10216,7 +10214,22 @@ sudo bluetoothctl
 # pair &lt;MAC&gt;
 ```
 
-You can now quit ``bluetoothctl`` by typing ```Ctrl + D```.</pre>
+You can now quit ``bluetoothctl`` by typing ``Ctrl + D``.
+Now close all running processes of ``rfcomm``.
+
+```
+sudo killall rfcomm
+```
+
+Now yo can connect to your device with following command
+```
+sudo rfcomm connect /dev/rfcomm0 20:16:10:24:29:77 1
+```
+Don't run the above command in background mode i.e. with ``&amp;`` at the end
+as you have to enter your user password (because of sudo)  and ``&amp;`` won't 
+prompt for password. It will just prompt you with :
+``Can't open RFCOMM device: Permission denied``
+or something similar.</pre>
 </div>
 <div created="20201208084726663" modified="20210728130811555" tags="" title="Cortex M4 Position Independent Code -fPIC">
 <pre># Generate position independent code.                                   -fPIC
@@ -10341,27 +10354,6 @@ As r9 used as base in both cases this code won't work!!!!
 Need to find a way to make linker make .bss relocations relatively to .data segment start
 
 </pre>
-</div>
-<div created="20211216115502076" draft.of="connecting bluetooth classic device from linux terminal" draft.title="connecting bluetooth classic device from linux terminal" modified="20211216122650292" tags="" title="Draft of 'connecting bluetooth classic device from linux terminal'">
-<pre>use ``bluetoothctl`` command to pair with relevant device
-
-
-```
-sudo bluetoothctl
-```
-
-
-```
-# power on
-# agent on
-# scan on
-# trust &lt;MAC&gt;
-# pair &lt;MAC&gt;
-```
-
-You can now quit ``bluetoothctl`` by typing ``Ctrl + D``.
-Now close all running processes of ``rfcomm``
-```sudo killall rfcomm```</pre>
 </div>
 <div created="20211021070937205" modified="20211205055704007" tags="" title="GIT">
 <pre>To &quot;fix&quot; an old commit with a small change, without changing the commit message of the old commit, where OLDCOMMIT is something like 091b73a:
