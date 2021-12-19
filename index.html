@@ -10197,7 +10197,7 @@ SCO is for real-time narrow band signal which does not require retransmission. V
 
 https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
-<div created="20211216115502076" modified="20211216124611917" tags="" title="connecting bluetooth classic device from linux terminal">
+<div created="20211216115502076" modified="20211219124607797" tags="" title="connecting bluetooth classic device from linux terminal">
 <pre>use ``bluetoothctl`` command to pair with relevant device
 
 
@@ -10253,6 +10253,20 @@ And now you can write into your device:
 ```
 sudo echo -en '\xda\xde\x00\x02\x00\x00\x00' &gt; /dev/rfcomm0 
 ```
+
+To read from ``/dev/rfcomm0`` continuosly using miniterm and tcp_serial_redirect.py.
+First open tcp_serial_redirect:
+
+```
+/usr/share/doc/python3-serial/examples/tcp_serial_redirect.py /dev/rfcomm0 460800
+```
+
+And then connect with miniterm.py like that:
+
+```
+miniterm socket://127.0.0.1:7777
+```
+
 
 
 </pre>
