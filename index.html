@@ -10197,7 +10197,7 @@ SCO is for real-time narrow band signal which does not require retransmission. V
 
 https://jimmywongiot.com/2020/07/08/how-to-install-nrf-sniffer-through-nrf52-dk-board/</pre>
 </div>
-<div created="20211216115502076" modified="20211219125548638" tags="" title="connecting bluetooth classic device from linux terminal">
+<div created="20211216115502076" modified="20211219135917880" tags="" title="connecting bluetooth classic device from linux terminal">
 <pre>use ``bluetoothctl`` command to pair with relevant device
 
 
@@ -10226,10 +10226,14 @@ Now yo can connect to your device with following command
 ```
 sudo rfcomm connect /dev/rfcomm0 20:16:10:24:29:77 1
 ```
+or
 
-Don't run the above command in background mode i.e. with ``&amp;`` at the end
-as you have to enter your user password (because of sudo)  and ``&amp;`` won't 
-prompt for password. It will just prompt you with : 
+```
+sudo su -c &quot;sudo rfcomm connect /dev/rfcomm0 00:80:E1:C5:69:0A 1 &amp;&quot;
+```
+
+If you want to connect  in background mode. Without this ``sudo su -c`` construct, running the command in background mode won't prompt 
+prompt for password because of ``&amp;``. It will just prompt you with : 
 
 ```
 Can't open RFCOMM device: Permission denied
