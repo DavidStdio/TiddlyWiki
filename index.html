@@ -213,6 +213,8 @@ Error message and password prompt
 
 <li>Cortex M4 Position Independent Code -fPIC</li>
 
+<li>Draft of 'Cortex M4 Position Independent Code -fPIC'</li>
+
 <li>GIT</li>
 
 <li>image.png</li>
@@ -9788,13 +9790,13 @@ Error message and password prompt
 <div created="20200824141719166" modified="20200824143042600" title="$:/state/tab/moresidebar-1850697562">
 <pre>$:/core/ui/MoreSideBar/All</pre>
 </div>
-<div created="20200824141448958" modified="20220104074756300" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Tools</pre>
+<div created="20200824141448958" modified="20220104080433145" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20220103140226201" list="[[Understanding relocation sections]] Tooling" modified="20220104074829542" title="$:/StoryList">
+<div created="20220104080434549" list="[[Draft of 'Cortex M4 Position Independent Code -fPIC']] [[Understanding relocation sections]]" modified="20220104080536837" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9810,7 +9812,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20220103140224335&quot;
+            &quot;text&quot;: &quot;20220104080431190&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -10412,6 +10414,133 @@ Disassembly of section .data:
 As r9 used as base in both cases this code won't work!!!!
 Need to find a way to make linker make .bss relocations relatively to .data segment start
 
+</pre>
+</div>
+<div created="20201208084726663" draft.of="Cortex M4 Position Independent Code -fPIC" draft.title="Cortex M4 Position Independent Code -fPIC or -fropi -frwpi" modified="20220104080910514" tags="" title="Draft of 'Cortex M4 Position Independent Code -fPIC'">
+<pre># Generate position independent code.                                   -fPIC
+# Access bss via the GOT.                                                         -mno-pic-data-is-text-relative
+# GOT is not PC-relative; store GOT location in a register.      -msingle-pic-base
+# Store GOT location in r9.                                                       -mpic-register=r9
+
+In PIC, all branches and jumps are PC-relative rather than absolute.
+All references to the data section are indirected through the Global Offset Table (GOT).
+The problem is for some absolute address, for instance functions pointer or static strings. 
+
+
+https://answers.launchpad.net/gcc-arm-embedded/+question/585437
+https://bugs.launchpad.net/gcc-arm-embedded/+bug/1523315
+https://github.com/bogdanm/udynlink
+https://www.embeddedrelated.com/showthread/comp.arch.embedded/200209-1.php
+https://github.com/rgujju/STM32-projects/tree/master/got_plt
+
+
+
+Cortex M4 position independent with clang compiler:
+
+
+```
+-fropi 
+-frwpi    
+
+```
+
+compiler switches enable generation of position independent code. 
+As for now I'm stuck in following sitauation. 
+The code is generated position independent and I see that access to global variables done via r9 register, which is the desired behavior. 
+When using -frwpi, as I understand, access to both global initialized data (.data) and global uninitialized data (.bss) will be by the r9 register
+as I see in following asm generated for `HAL_IncTick function`:
+
+
+```
+__weak void HAL_IncTick(void)
+{
+  uwTick += (uint32_t)uwTickFreq;
+
+0800ab2e &lt;HAL_IncTick&gt;:
+ 800ab2e: 40 f2 20 00  	movw	r0, #32
+ 800ab32: c0 f2 00 00  	movt	r0, #0
+ 800ab36: 49 46        	mov	r1, r9
+ 800ab38: 08 58        	ldr	r0, [r1, r0]
+ 800ab3a: 45 f6 c8 62  	movw	r2, #24264
+ 800ab3e: c0 f2 00 02  	movt	r2, #0
+ 800ab42: 8b 58        	ldr	r3, [r1, r2]
+ 800ab44: 18 44        	add	r0, r3
+ 800ab46: 88 50        	str	r0, [r1, r2]
+```
+
+
+Where `uwTick` is in bss as it declared like that:
+
+
+```
+__IO uint32_t uwTick;
+```
+
+
+and it does not have initial value. 
+And where `uwTickFreq` is in .data as it declared like that
+
+
+```
+HAL_TickFreqTypeDef uwTickFreq = HAL_TICK_FREQ_DEFAULT;  /* 1KHz */
+```
+
+
+and initialized with `HAL_TICK_FREQ_DEFAULT`
+
+As for now this does not work, as the offsets to .bss data are given relatively to .bss section start
+
+which is 
+
+
+```
+
+Disassembly of section .bss:
+
+20000458 &lt;completed.1&gt;:
+```
+
+So the  #24264 offset which is used in this part 
+
+
+```
+ 800ab3a: 45 f6 c8 62  	movw	r2, #24264
+ 800ab3e: c0 f2 00 02  	movt	r2, #0
+ 800ab42: 8b 58        	ldr	r3, [r1, r2]
+```
+
+so  0d24264 + 0x20000458 gives address of uwTick which is : 0x20006320
+And offsets to variables in .data segment is given relatively to .data section start
+which is  0x20000000  and in this part we see that 32 is used as offset to uwTickFreq
+
+
+```
+ 800ab2e: 40 f2 20 00  	movw	r0, #32
+ 800ab32: c0 f2 00 00  	movt	r0, #0
+ 800ab36: 49 46        	mov	r1, r9
+ 800ab38: 08 58        	ldr	r0, [r1, r0]
+```
+
+.data section disassembly
+
+```
+Disassembly of section .data:
+
+20000000 &lt;_sdata&gt;:
+20000000: d0 07        	lsls	r0, r2, #31
+20000002: 00 00        	movs	r0, r0
+
+20000020 &lt;uwTickFreq&gt;:
+20000020: 01 00        	movs	r1, r0
+20000022: 00 00        	movs	r0, r0
+```
+
+As r9 used as base in both cases this code won't work!!!!
+Need to find a way to make linker make .bss relocations relatively to .data segment start
+
+
+So the workaround I found was to use the ``PHDRS`` command in linker script. This command allows us to explicitly load sections in desired segments.
+This way we can place both ``.data`` and ``.bss` sections in ``data`` segment in runtime!
 </pre>
 </div>
 <div created="20211021070937205" modified="20211205055704007" tags="" title="GIT">
