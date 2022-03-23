@@ -10044,7 +10044,7 @@ Electrode impedance measurement:
 
 Because of the capacitive components corresponding to skin-electrode interface, alternate current (AC) measurement is needed to estimate the skin-electrode impedance. In particular, for dry contact electrodes, which capacitance is considerably high than wet electrodes.</pre>
 </div>
-<div created="20220323083654067" modified="20220323140933960" tags="" title="ARC Metaware license installation">
+<div created="20220323083654067" modified="20220323141901308" tags="" title="ARC Metaware license installation">
 <pre>ARC Metaware node locked license tied to PC MAC address (sort of).
 This means if wired connection mac address provided to arc, and during 
 the connection switched to wifi the license won't work anymore as wifi 
@@ -10091,9 +10091,25 @@ con-name [connection_name]: Connection name. This is optional. When not provided
 nmcli con add type ethernet con-name eth_arc_lic_mac_address ifname enp0s20f0u2u1
 ```
 
+Now modify the 802-3-ethernet.cloned-mac-address property of the new connection profile
 
+```
+nmcli con mod eth_arc_lic_mac_address 802-3-ethernet.cloned-mac-address F0:9E:4A:EB:AA:4F
+```
 
-</pre>
+And switch to new connection profile
+
+```
+nmcli con down eth0
+nmcli con up eth_arc_lic_mac_address
+```
+
+Probably network restart will be required
+
+```
+nmcli networking off
+nmcli networking on
+```</pre>
 </div>
 <div created="20200826124733722" modified="20200827135904143" tags="" title="ARMv7-m branching decipher on STM32L4 mcu">
 <pre>Following command 
