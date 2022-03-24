@@ -9796,7 +9796,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20220323093902345" list="[[ARC Metaware license installation]]" modified="20220323093902345" title="$:/StoryList">
+<div created="20220323142532320" list="[[ARC Metaware license installation]]" modified="20220323142652596" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9812,7 +9812,7 @@ Error message and password prompt
         },
         &quot;$:/info/startup-timestamp&quot;: {
             &quot;title&quot;: &quot;$:/info/startup-timestamp&quot;,
-            &quot;text&quot;: &quot;20220323093848173&quot;
+            &quot;text&quot;: &quot;20220323142526841&quot;
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
@@ -10044,72 +10044,52 @@ Electrode impedance measurement:
 
 Because of the capacitive components corresponding to skin-electrode interface, alternate current (AC) measurement is needed to estimate the skin-electrode impedance. In particular, for dry contact electrodes, which capacitance is considerably high than wet electrodes.</pre>
 </div>
-<div created="20220323083654067" modified="20220323141901308" tags="" title="ARC Metaware license installation">
+<div created="20220323083654067" modified="20220324082010763" tags="" title="ARC Metaware license installation">
 <pre>ARC Metaware node locked license tied to PC MAC address (sort of).
 This means if wired connection mac address provided to arc, and during 
 the connection switched to wifi the license won't work anymore as wifi 
 mac address is not the same as wired connection mac. Unless physical 
 mac address is overwritten by software in the runtime. So to overwrite 
 the mac address on centos 7 following should be done:
-The :
 
-```
-nmcli con show --active
-```
 
-command will give the active connection. 
-
-```
-NAME         UUID                                  TYPE      DEVICE        
-Wired_con_1  6e35a56d-366a-3138-9a90-6a06f8683b4c  ethernet  enp0s20f0u2u1 
-virbr0       6632f6ff-4db0-436b-8ece-d42ce131fdcb  bridge    virbr0 
-```
-
-Is the output in my case. Now type:
-
-```
-nmcli con show Wired_con_1
-```
-
-This will show all parameters of ``Wired_con_1``
 
 Check if the *.mac-address property has the mac address for which the license was issued.
-If not, we need to overwrite the mac address, i.e. to set property called ``802-3-ethernet.cloned-mac-address``
-Or create another connection profile over the same ethernet interface (i.e over enp0s20f0u2u1) dedicated 
-for work with arc metaware ide. 
-
-Create connection profile with ``nmcli``
-The minimum properties we need define are ``type`` 
-``ifname`` ``con-name``
-
+If it is not, either modify existing connection profile ( set ``802-3-ethernet.cloned-mac-address`` property with required mac address)
+either create dedicated connection profile and set the ``802-3-ethernet.cloned-mac-address`` property there).
+To create dedicated connection profile:
+Use the ``add`` argument to add a connection profile with at least the ``type`` ``ifname`` and ``con-name`` options populated.
 type [type]: Connection type. Valid types of connections are ethernet, wifi, wimax, pppoe, gsm, cdma, infiniband, bluetooth, vlan, bond, bond-slave, team, team-slave, bridge, bridge-slave, vpn, and olpc-mesh.
 ifname [ifname]: Interface to bind the connection to. A special value of “*” can be used for interface-independent connections.
 con-name [connection_name]: Connection name. This is optional. When not provided, a default name is generated, [type][-ifname][-num].
-
-
-```
-nmcli con add type ethernet con-name eth_arc_lic_mac_address ifname enp0s20f0u2u1
-```
-
-Now modify the 802-3-ethernet.cloned-mac-address property of the new connection profile
+The ifname is the name of the physical ethernet device (in my case enp0s20f0u2u1). 
 
 ```
-nmcli con mod eth_arc_lic_mac_address 802-3-ethernet.cloned-mac-address F0:9E:4A:EB:AA:4F
+nmcli c add type ethernet ifname enp0s20f0u2u1 con-name eth_arc_lic_mac_address
 ```
 
-And switch to new connection profile
+Now modify the ``cloned_mac_address`` parameter of the new connection profile. Set its value
+with the value of mac address license was issued for.
 
 ```
-nmcli con down eth0
-nmcli con up eth_arc_lic_mac_address
+nmcli connection  modify eth_arc_lic_mac_address 802-3-ethernet.cloned-mac-address F0:9E:4A:EB:AA:4F
 ```
 
-Probably network restart will be required
+now stop current connection profile
 
 ```
-nmcli networking off
-nmcli networking on
-```</pre>
+nmcli c down ``connection_name``
+```
+and start the newly created connection
+
+```
+nmcli connection up eth_arc_lic_mac_address 
+```
+From now on the arc metaware should work
+
+
+
+</pre>
 </div>
 <div created="20200826124733722" modified="20200827135904143" tags="" title="ARMv7-m branching decipher on STM32L4 mcu">
 <pre>Following command 
